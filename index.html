@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hangman</title>
+    <style>
+    </style>
+</head>
+<body>
+    <!-- Create the look -->
+
+    <h3 id="text-area"> - - - - -  </h3>
+
+
+
+
+    <script>  //Build the logic!
+
+        // Create an array with all the possible needed content.
+        var detailsArray = [
+            ["Test", "wordLengthSelfRef", "link to picture"],
+            ["Example", "wordLengthSelfRef", "link to picture"],
+            ["Proper Name", "wordLengthSelfRef", "link to picture"],
+            ["TrickyWord", "wordLengthselfRef", "link to a picture"]
+            ];
+        // var answersArray = ["Test", "Example", "TrickyWord", "Proper Name"];
+        var textArea = document.getElementById("text-area");
+
+        //This will give us a random number to define which word we pick. It is generated at the load of the page now, so will probably need to move into a certain time in the function, later.
+        var numRand = (Math.floor(Math.random() * Math.floor(detailsArray.length)));
+
+        //This var picks the first word in our array, effectively picking the word we'll work with.
+        var theAnswer = (detailsArray[numRand][0]);
+
+        var spelledWord = [];
+
+        //Create a variable that lists the letters of a word as an array.
+
+        //We may need a function like this to give us a 'new' random number, but play with how return works
+        function pickAnswer() {
+            return (Math.floor(Math.random() * Math.floor(detailsArray.length)));
+        }
+
+
+           
+
+        for( var i = 0; i < detailsArray.length; i++) {
+        console.log(detailsArray[i]);
+        console.log(" List of detailsArray contents ^^ ");
+        }
+
+            
+            //List an answer based on the randomly chosen value//
+        // console.log(detailsArray[numRand]);
+        // console.log("This should be the detailsArray, listed out, once, randomly");
+
+        console.log(theAnswer);
+        console.log("This should be the first value of detailsArray, giving us the word we'll work with");
+    
+    
+
+        
+        for (var i = 0; i < theAnswer.length; i++) {
+        console.log(theAnswer.charAt(i));
+        spelledWord.push(theAnswer.charAt(i));
+        }
+    
+
+        console.log(spelledWord);
+
+
+      //  var spelledOut = Array.of[ FUNCTION HERE THAT'S THE FOR LOOP ]
+        console.log("----DONE----");
+
+        // Define word length
+
+        // fix the CaSe of all your outputs
+
+        // Create a function to randomly select a word as the answer.
+
+        // Create a function to assign each letter of the picked word as its own array.
+
+        // Create a function that looks to see if the picked letter is in the answer
+
+        //  If the letter is part of the word
+
+        
+
+
+</script>
+
+</body>
+</html>
