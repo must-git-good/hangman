@@ -11,21 +11,26 @@
 <body>
     <!-- Create the look -->
 
-    <h3 id="text-area"> Check the console for notes and logic as building. </h3>
+    <h1> Let's Play Hangman!</h1>
+
+    <h2>Pick a letter that you might think goes in the word.<br>
+        But be careful:  You only get 10 wrong guesses!</h2>
 
 
     <h2>Your word is: <span id="Hangman-Word"> - - - - - -  </span></h2>
 
-
+        <h3>Guesses remaining: <span id="guess-count">10</span>.</h3>
 
 
     <script>  //Build the logic!
 
         //Functional variables:
-
+        var wrongGuess = 0;  // Start a counter at zero for number of wrong guesses.
+        
 
 
         // Create an array with all the possible needed content. Adding a few more here for now to test.
+        // Consider making this an object instead, so that you can select properties, etc.
         var detailsArray = [
             ["Test", "wordLengthSelfRef", "link to picture"],
             ["Example", "wordLengthSelfRef", "link to picture"],
@@ -90,7 +95,37 @@
 
         //  If the letter is part of the word
 
+    
+
+        document.onkeyup = function(input){
+        var userGuess = input.key;
+        console.log(userGuess);
+        console.log("^ This letter was just guessed.")
+        for(var i=0;i<spelledWord.length;i++){
         
+        //THINGS TO DO WHEN A GUESS IS RIGHT
+        if(userGuess === spelledWord[i]){
+         console.log("You guessed a proper letter!");
+         
+         return(spelledWord[i]);
+        }
+        
+        
+        
+        //THINGS TO DO WHEN A GUESS IS WRONG
+        if(userGuess !== spelledWord[i]){
+        
+        var wrongGuess =  i++;
+        console.log(wrongGuess);
+
+        }
+
+
+
+        }
+
+
+      }
 
 
 </script>
