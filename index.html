@@ -48,7 +48,6 @@
         var allowedGuesses = 10;  //This allows us to set the difficulty and just adds resilience to our code.
         var spelledWord = []; //This blank array will be populated by a for-loop that will spell out our chosen answer.
         
-
         // Create an array with all the possible needed content. Adding a few more here for now to test.
         // Consider making this an object instead, so that you can select properties, etc.
         var detailsArray = [
@@ -60,14 +59,17 @@
             ["Thesaurus"]
             ];
 
-        var dashes = [];            
-        //Define the word to be put in above. Because it's 1 word at a time this might need to be different. In the actual function of the game, it'll push out letter-by-letter.  
-        var hangmanWord = document.getElementById("Hangman-Word");
+        var emptyWord = [];     // This is the empty (with dashes) array that will populate as letters are guessed.       
+        
 
 
 
         //This will give us a random number to define which word we pick. It is generated at the load of the page now, so will probably need to move into a certain time in the function, later.
         var numRand = (Math.floor(Math.random() * Math.floor(detailsArray.length)));
+
+function updateHTML() {
+    document.querySelector("#blanks").innerHTML = "    " + emptyWord.join('') + ".";
+}
 
 
     // Create functions:
@@ -81,6 +83,8 @@ function keepPlaying() {  //This will let the game continue, refreshing the code
 
     // MAIN PROCESS:
     //-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+
 
         //This var picks the first word in our array, effectively picking the word we'll work with.
         var theAnswer = (detailsArray[numRand][0]);
@@ -113,22 +117,22 @@ function keepPlaying() {  //This will let the game continue, refreshing the code
        
         // This for loop will populate our dashes array with the right number of blanks (dashes).
         for (var i = 0; i < wordLength; i++) {
-        dashes.push("-");
+        emptyWord.push("-");
         console.log(i);
         }
 
         //And we push those dashes onto the screen for the user.
         console.log("<-------6. And then we put those dashes onto the screen.");
-        document.querySelector("#blanks").innerHTML = "    " + dashes.join('') + ".";
+        document.querySelector("#blanks").innerHTML = "    " + emptyWord.join('') + ".";
 
 
         
 
         // fix the CaSe of all your outputs
 
+            // Look at splice function (index, 1, "what we put instead")
 
-
-       
+       // a check for letter validity!
         
         console.log(spelledWord);
         
@@ -136,7 +140,7 @@ function keepPlaying() {  //This will let the game continue, refreshing the code
     
 
         document.onkeyup = function(input){             // User hits a key
-        var userGuess = input.key;                      // The key they press is defined as their guess.
+        var userGuess = input.key.toLowerCase();                      // The key they press is defined as their guess.
         console.log(userGuess);
         console.log("^^^3: This letter is the user's guess.")
         document.querySelector("#user-guess").innerHTML = userGuess;
@@ -148,14 +152,36 @@ function keepPlaying() {  //This will let the game continue, refreshing the code
                         
                         //THINGS TO DO WHEN A GUESS IS RIGHT
                         if(userGuess === spelledWord[i]){
+                            emptyWord.splice([i], 1, userGuess)
+
                          console.log("You guessed a proper letter!");
                         
                          console.log(spelledWord[i]);
-                         return(true);
+                        
                         } 
-                        }
-                        }
+                        }  //END OF FOR LOOP
+                        console.log (emptyWord);
 
+                        updateHTML();
+                        }   // END OF PRESS FUNCTION
+
+
+// CLASS PSEUDO CODE SUGGESTIONS:
+//  
+//  
+//  
+//  
+//  
+//  
+//  
+//  
+//  
+//  
+//  
+//  
+//  
+//  
+//  
 
 </script>
 
