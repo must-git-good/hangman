@@ -4,30 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Monoton" rel="stylesheet">
     <title>Hangman</title>
     <style>
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        #retro{
+            font-family: 'Monoton', cursive;
+        }
+        #blanks{
+            font-family: 'Monoton', cursive;
+            letter-spacing: 8px;
+        }
     </style>
 </head>
 <body>
+<div>   <!-- Minimize me to just see your script -->
     <!-- Create the look -->
 
-    <h1> Let's Play Hangman!</h1>
+    <h1> LET'S PLAY <span id="retro">Retro Videogame</span> HANGMAN!</h1>
+    <h2>YOUR WORD: <span id="blanks" style="letter-spacing: 8px;"></span></h2>
 
-    <h2>Pick a letter that you might think goes in the word.<br>
-        But be careful:  You only get 10 wrong guesses!</h2>
+    <h3>Pick a letter that you think goes in the word.<br>
+        But be careful:  You only get 10 wrong guesses!</h3>
 
 
-    <h2>Your word is: <span id="Hangman-Word"> - - - - - -  </span></h2>
+    <h2>You guessed: <span id="user-guess">   </span></h2>
+    <h2>Clue length:<span id="clue-length">   </span></h2>
+
 
         <h3>Guesses remaining: <span id="guess-count">10</span>.</h3>
-
-
-    <script>  //Build the logic!
-
-        //Functional variables:
-        var wrongGuess = 0;  // Start a counter at zero for number of wrong guesses.
         
+</div>
 
+    <script> 
+
+        
+    //Define global variables:
+    //----------------------------------------------------------------------------------------------------------------------------------------------
+
+        var wrongGuess = 0;  // Start a counter at zero for number of wrong guesses.
+        var allowedGuesses = 10;  //This allows us to set the difficulty and just adds resilience to our code.
+        var spelledWord = []; //This blank array will be populated by a for-loop that will spell out our chosen answer.
+        
 
         // Create an array with all the possible needed content. Adding a few more here for now to test.
         // Consider making this an object instead, so that you can select properties, etc.
@@ -37,9 +57,10 @@
             ["Proper Name", "wordLengthSelfRef", "link to picture"],
             ["TrickyWord", "wordLengthselfRef", "link to a picture"],
             ["Xerox"],
-            ["Antidisestablishmentarianism"]
+            ["Thesaurus"]
             ];
-                    
+
+        var dashes = [];            
         //Define the word to be put in above. Because it's 1 word at a time this might need to be different. In the actual function of the game, it'll push out letter-by-letter.  
         var hangmanWord = document.getElementById("Hangman-Word");
 
@@ -48,84 +69,92 @@
         //This will give us a random number to define which word we pick. It is generated at the load of the page now, so will probably need to move into a certain time in the function, later.
         var numRand = (Math.floor(Math.random() * Math.floor(detailsArray.length)));
 
-// PICK AND SPELL A WORD:
 
-        //This var picks the first word in our array, effectively picking the word we'll work with. Later, it will need to re-pick a new word once we're 'done'. 
+    // Create functions:
+    //----------------------------------------------------------------------------------------------------------------------------------------------------
+
+function keepPlaying() {  //This will let the game continue, refreshing the code to give letters on user input.
+    if (wrongGuess < (allowedGuess+1));   // Add an "or you've not yet won"
+}
+
+
+
+    // MAIN PROCESS:
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+        //This var picks the first word in our array, effectively picking the word we'll work with.
         var theAnswer = (detailsArray[numRand][0]);
-
-        //This blank array will be populated by a for-loop that will spell out our chosen answer.
-        var spelledWord = [];
-
-
-
-
-           
-        // This for loop is listing out the details of what's included in our arrays. Mostly for testing.
-                // for( var i = 0; i < detailsArray.length; i++) {
-                // console.log(detailsArray[i]);
-                // console.log(" List of detailsArray contents ^^ ");
-                // }
-
-            
-            //List an answer based on the randomly chosen value//
-        // console.log(detailsArray[numRand]);
-        // console.log("This should be the detailsArray, listed out, once, randomly");
-
-    
+        console.log(theAnswer);
+        console.log("^-------1: The word that we'll use is chosen randomly.")
+        
 
         // This for-loop populates our empty spelledWord variable with the letters of our chosen word.
         for (var i = 0; i < theAnswer.length; i++) {
-        console.log(theAnswer.charAt(i));
         spelledWord.push(theAnswer.charAt(i));
         }
     
-
         console.log(spelledWord);
-        console.log("----DONE----");
+        console.log("^-------2: The chosen word is broken into letters and stored in an array.")
+        
+        var wordLength = spelledWord.length;
+        console.log(wordLength);
+        console.log("^-------3. We set the length of our clue.");
 
-        // Define word length
+        function setBlankWord(wordLength) {
+            document.querySelector("#clue-length").innerHTML = " Your word is "+ wordLength + " letters long.";  //This will just be blanks, later, I guess.
+        }
+        
+        setBlankWord(wordLength);
+        console.log("<-------4. We present the length of the clue to the user on the screen.")
+
+        
+
+        console.log("v-------5. We output dashes that are as long as our word.");
+       
+        // This for loop will populate our dashes array with the right number of blanks (dashes).
+        for (var i = 0; i < wordLength; i++) {
+        dashes.push("-");
+        console.log(i);
+        }
+
+        //And we push those dashes onto the screen for the user.
+        console.log("<-------6. And then we put those dashes onto the screen.");
+        document.querySelector("#blanks").innerHTML = "    " + dashes.join('') + ".";
+
+
+        
 
         // fix the CaSe of all your outputs
 
-        // Create a function to randomly select a word as the answer.
 
-        // Create a function to assign each letter of the picked word as its own array.
 
-        // Create a function that looks to see if the picked letter is in the answer
-
-        //  If the letter is part of the word
-
+       
+        
+        console.log(spelledWord);
+        
+        console.log(spelledWord);
     
 
-        document.onkeyup = function(input){
-        var userGuess = input.key;
+        document.onkeyup = function(input){             // User hits a key
+        var userGuess = input.key;                      // The key they press is defined as their guess.
         console.log(userGuess);
-        console.log("^ This letter was just guessed.")
-        for(var i=0;i<spelledWord.length;i++){
-        
-        //THINGS TO DO WHEN A GUESS IS RIGHT
-        if(userGuess === spelledWord[i]){
-         console.log("You guessed a proper letter!");
-         
-         return(spelledWord[i]);
-        }
+        console.log("^^^3: This letter is the user's guess.")
+        document.querySelector("#user-guess").innerHTML = userGuess;
+
         
         
-        
-        //THINGS TO DO WHEN A GUESS IS WRONG
-        if(userGuess !== spelledWord[i]){
-        
-        var wrongGuess =  i++;
-        console.log(wrongGuess);
 
-        }
-
-
-
-        }
-
-
-      }
+                        for(var i=0;i<spelledWord.length;i++){
+                        
+                        //THINGS TO DO WHEN A GUESS IS RIGHT
+                        if(userGuess === spelledWord[i]){
+                         console.log("You guessed a proper letter!");
+                        
+                         console.log(spelledWord[i]);
+                         return(true);
+                        } 
+                        }
+                        }
 
 
 </script>
