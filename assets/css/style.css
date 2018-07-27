@@ -1,0 +1,65 @@
+/* STYLE */
+
+
+body{
+    background-image: url("../images/old_tv.png");
+    background-size: 900px;
+    background-repeat: no-repeat;
+    background-color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    position: relative;
+    z-index: 1;
+}
+#overlay{
+    width: 900px;
+    position: absolute;
+    z-index: 5;
+}
+#fuzzy{
+    position: absolute;
+    width: 600px;
+    left: 125px;
+    top: 75px;
+    opacity: .4;
+    z-index: 4;
+}
+#retro{
+    font-family: 'Monoton', cursive;
+    text-align: center;
+}
+#blanks{
+    font-family: 'Monoton', cursive;
+    letter-spacing: 8px;
+    font-size: 3 em;
+    font-style: bold;
+}
+h1,h2,h3,h4,h5,h6{
+    color: black;
+    font-size: 1.4em;
+    text-shadow: 2px 2px 5px darkgrey;
+    font-style: bold;
+    opacity: .8;
+}
+h1{
+    font-size: 3.5em;
+}
+h2{
+    font-size: 2.5em;
+}
+h3,h4{
+    font-size: 1.6em;
+}
+p{
+    font-size: 1.2em;
+    text-align: center;
+    text-shadow: 2px 2px 5px darkgrey;
+    font-style: bold;
+    opacity: .8;
+}
+#theTV{
+    position:absolute;
+    left: 160px;
+    top: 100px;
+    width: 500px;
+    z-index: 2;
+}

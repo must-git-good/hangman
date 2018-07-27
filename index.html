@@ -4,195 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Monoton" rel="stylesheet">
-    <title>Hangman</title>
-    <style>
-        body{
-            font-family: Arial, Helvetica, sans-serif;
-        }
-        #retro{
-            font-family: 'Monoton', cursive;
-        }
-        #blanks{
-            font-family: 'Monoton', cursive;
-            letter-spacing: 8px;
-        }
-    </style>
+    
+    <title>Retro Videogame Hangman</title>
 </head>
 <body>
-<div>   <!-- Minimize me to just see your script -->
-    <!-- Create the look -->
-
-    <h1> LET'S PLAY <span id="retro">Retro Videogame</span> HANGMAN!</h1>
-    <h2>YOUR WORD: <span id="blanks" style="letter-spacing: 8px;"></span></h2>
-
-    <h3>Pick a letter that you think goes in the word.<br>
-        But be careful:  You only get 10 wrong guesses!</h3>
-
-
-    <h2>You guessed: <span id="user-guess">   </span></h2>
-    <h2>Clue length:<span id="clue-length">   </span></h2>
-
-
-        <h3>Guesses remaining: <span id="guess-count">10</span>.</h3>
-        
-</div>
-
-    <script> 
-
-        
-    //Define global variables:
-    //-----------------------------------------------------------------------------------------------------
-
-        var wrongGuess = 0;  // Start a counter at zero for number of wrong guesses.
-        var allowedGuesses = 10;  //This allows us to set the difficulty and just adds resilience to our code.
-        var spelledWord = []; //This blank array will be populated by a for-loop that will spell out our chosen answer.
-        
-            // Create an array with all the possible needed content. Adding a few more here for now to test.
-            // Consider making this an object instead, so that you can select properties, etc.
-        var detailsArray = [
-            ["Test", "wordLengthSelfRef", "link to picture"],
-            ["Example", "wordLengthSelfRef", "link to picture"],
-            ["Proper Name", "wordLengthSelfRef", "link to picture"],
-            ["TrickyWord", "wordLengthselfRef", "link to a picture"],
-            ["Xerox"],
-            ["Thesaurus"]
-            ];
-
-        var emptyWord = [];     // This is the empty (with dashes) array that will populate as letters are guessed.  
-
-            //This will give us a random number to define which word we pick. It is generated at the load of the page now, so will probably need to move into a certain time in the function, later.
-         var numRand = (Math.floor(Math.random() * Math.floor(detailsArray.length)));
-            //This var picks the first word in our array, effectively picking the word we'll work with.
-         var theAnswer = (detailsArray[numRand][0]);
-        console.log(theAnswer);
-        console.log("^-------1: The word that we'll use is chosen randomly.")
-        
-
-
-    // Create functions:
-    //-------------------------------------------------------------------------------------------------------
-      
-
-        function updateHTML() {
-            document.querySelector("#blanks").innerHTML = "    " + emptyWord.join('') + ".";
-        }
-
-        function fixCase(anArray) {
-            for(var i= 0;i<theAnswer.length;i++){  /// Note we cheat here and get length from chosen word.
-            console.log(anArray[i]);
-            anArray[i] = anArray[i].toLowerCase();
-            }
-        }
-
-        function keepPlaying() {  //This will let the game continue, refreshing the code to give letters on user input.
-            if (wrongGuess < (allowedGuess+1));   // Add an "or you've not yet won"
-        }
-
-
-
-    // MAIN PROCESS:
-    //-------------------------------------------------------------------------------------------------------
-
-
-        // This for-loop populates our empty spelledWord variable with the letters of our chosen word.
-        for (var i = 0; i < theAnswer.length; i++) {
-        spelledWord.push(theAnswer.charAt(i));
-        }
-    
-        console.log(spelledWord);
-        console.log("^-------2: The chosen word is broken into letters and stored in an array.")
-        
-        var wordLength = spelledWord.length;
-        console.log(wordLength);
-        console.log("^-------3. We set the length of our clue.");
-
-        function setBlankWord(wordLength) {
-            document.querySelector("#clue-length").innerHTML = " Your word is "+ wordLength + " letters long.";  //This will just be blanks, later, I guess.
-        }
-        
-        setBlankWord(wordLength);
-        console.log("<-------4. We present the length of the clue to the user on the screen.")
-
-        
-
-        console.log("v-------5. We output dashes that are as long as our word.");
-       
-        // This for loop will populate our dashes array with the right number of blanks (dashes).
-        for (var i = 0; i < wordLength; i++) {
-        emptyWord.push("-");
-        }
-
-
-
-        //And we push those dashes onto the screen for the user.
-        console.log("<-------6. And then we put those dashes onto the screen.");
-        document.querySelector("#blanks").innerHTML = "    " + emptyWord.join('') + ".";
-
-
-        fixCase(spelledWord);     /// FIND MY HOME
-        console.log("-------> 7. Case has been fixed. See: " + spelledWord);
-
-    
-
-        
-
-       // a check for letter validity!
-        
-        
-    
-
-        document.onkeyup = function(input){             // User hits a key
-        var userGuess = input.key.toLowerCase();                      // The key they press is defined as their guess.
-        // console.log(userGuess);
-        // console.log("^^^3: This letter is the user's guess.")
-        document.querySelector("#user-guess").innerHTML = userGuess;
-
-
-        for(var i=0;i<spelledWord.length;i++){
-        
-        //THINGS TO DO WHEN A GUESS IS RIGHT
-        if(userGuess === spelledWord[i]){
-            emptyWord.splice([i], 1, userGuess)
-
-            console.log("You guessed a proper letter!");
-        
-            console.log(spelledWord[i]);
-        
-        } 
-        }  //END OF FOR LOOP
-
-            console.log(emptyWord);
-            console.log(spelledWord);
-        if(emptyWord === spelledWord){
-            
-            console.log( " We have a working victory condition.");
-        }
-
-
-
-        updateHTML();
-        }   // END OF PRESS FUNCTION
-
-
-// CLASS PSEUDO CODE SUGGESTIONS:
-//  
-//  
-//  
-//  
-//  
-//  
-//  
-//  
-//  
-//  
-//  
-//  
-//  
-//  
-//  
-
-</script>
-
+    <div>   
+        <img id="overlay" src="assets/images/old_tv_overlay.png">
+        <img id="fuzzy" src="assets/images/tv_fuzz.gif">
+            <div id="theTV">
+                <h5>LET'S PLAY...</h5>
+                <h1><span id="retro">Retro Videogame HANGMAN!</span> </h1>
+                    <br>
+                <h3>YOUR WORD:<span id="blanks" style="letter-spacing: 8px;"></span></h3>
+                    <br>
+                <h5>YOU GUESSED: <span id="user-guess">   </span></h5>
+                <h5>LIVES REMAINING: <span id="lives-left">  </span>.</h5>
+                <p>Pick a letter that you think goes in the word.
+                    <br>
+                    But be careful:  You only get <span id="guesses">  </span> guesses!
+                </p>
+            </div>     
+        </img>
+        </img>
+    </div>
+<script src="../hangman/logic.js"></script>
 </body>
 </html>
