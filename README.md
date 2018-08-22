@@ -8,7 +8,7 @@ This project is live (deployed on github), so take a look:
 
 ### Purpose
 
-As a game created during my time at UT Austin's Coding Bootcamp, this website was a an example of the following growing web development skills:
+As a game created during my time at UT Austin's Coding Bootcamp, this website was an example of the following growing web development skills:
 
 ```
 - [ ] Javascript Implementation
