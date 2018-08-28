@@ -4,7 +4,7 @@ A javascript-powered word game...with a fun theme!
 ## Take a Look: 
 
 This project is live (deployed on github), so take a look:
-  (https://must-git-good.github.io/Responsive-Portfolio/)
+  (https://must-git-good.github.io/hangman/)
 
 ### Purpose
 
